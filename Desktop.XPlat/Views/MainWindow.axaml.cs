@@ -1,9 +1,9 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Remotely.Desktop.XPlat.ViewModels;
+using Tess.Desktop.XPlat.ViewModels;
 
-namespace Remotely.Desktop.XPlat.Views
+namespace Tess.Desktop.XPlat.Views
 {
     public class MainWindow : Window
     {

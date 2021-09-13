@@ -1,5 +1,5 @@
-﻿using Remotely.Server.Installer.Models;
-using Remotely.Shared.Utilities;
+﻿using Tess.Server.Installer.Models;
+using Tess.Shared.Utilities;
 using Server.Installer.Models;
 using System;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace Server.Installer.Services
         {
             _httpClient = new HttpClient();
             _httpClient.Timeout = TimeSpan.FromHours(8);
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Remotely Server Installer");
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Tess Server Installer");
         }
 
         public void Dispose()
@@ -76,7 +76,7 @@ namespace Server.Installer.Services
             try
             {
                 var message = GetHttpRequestMessage(HttpMethod.Get, 
-                    $"{_apiHost}/repos/{cliParams.GitHubUsername}/Remotely/actions/artifacts",
+                    $"{_apiHost}/repos/{cliParams.GitHubUsername}/Tess/actions/artifacts",
                     cliParams);
 
                 var response = await _httpClient.SendAsync(message);
@@ -113,7 +113,7 @@ namespace Server.Installer.Services
         {
             try
             {
-                var response = await _httpClient.GetFromJsonAsync<GitHubReleasesResponsePayload>("https://api.github.com/repos/lucent-sea/Remotely/releases/latest");
+                var response = await _httpClient.GetFromJsonAsync<GitHubReleasesResponsePayload>("https://api.github.com/repos/lucent-sea/Tess/releases/latest");
                 return response.tag_name;
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace Server.Installer.Services
 
                 var message = GetHttpRequestMessage(
                     HttpMethod.Post, 
-                    $"{_apiHost}/repos/{cliParams.GitHubUsername}/Remotely/actions/workflows/build.yml/dispatches",
+                    $"{_apiHost}/repos/{cliParams.GitHubUsername}/Tess/actions/workflows/build.yml/dispatches",
                     cliParams);
 
                 var rid = EnvironmentHelper.IsLinux ?

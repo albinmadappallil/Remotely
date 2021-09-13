@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
-using Remotely.Agent.Interfaces;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Win32;
+using Tess.Agent.Interfaces;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
+using Tess.Shared.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace Remotely.Agent.Services
+namespace Tess.Agent.Services
 {
 
     public class AppLauncherWin : IAppLauncher

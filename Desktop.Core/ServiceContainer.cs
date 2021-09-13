@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Remotely.Desktop.Core
+namespace Tess.Desktop.Core
 {
     public class ServiceContainer
     {

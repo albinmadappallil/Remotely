@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Remotely.Agent.Interfaces;
-using Remotely.Agent.Services;
-using Remotely.Server.API;
-using Remotely.Server.Data;
-using Remotely.Server.Services;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
+using Tess.Agent.Interfaces;
+using Tess.Agent.Services;
+using Tess.Server.API;
+using Tess.Server.Data;
+using Tess.Server.Services;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
 using System;
 
-namespace Remotely.Tests
+namespace Tess.Tests
 {
     [TestClass]
     public class IoCActivator
@@ -48,13 +48,13 @@ namespace Remotely.Tests
         {
             services.AddDbContextFactory<AppDb>(options =>
             {
-                options.UseInMemoryDatabase("Remotely");
+                options.UseInMemoryDatabase("Tess");
             });
 
             services.AddScoped(p =>
                 p.GetRequiredService<IDbContextFactory<AppDb>>().CreateDbContext());
 
-            services.AddIdentity<RemotelyUser, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
+            services.AddIdentity<TessUser, IdentityRole>(options => options.Stores.MaxLengthForKeys = 128)
              .AddEntityFrameworkStores<AppDb>()
              .AddDefaultUI()
              .AddDefaultTokenProviders();

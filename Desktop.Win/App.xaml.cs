@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
-using Remotely.Desktop.Core;
-using Remotely.Desktop.Core.Interfaces;
-using Remotely.Desktop.Core.Services;
-using Remotely.Desktop.Win.Services;
-using Remotely.Desktop.Win.Views;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Win32;
+using Tess.Desktop.Core;
+using Tess.Desktop.Core.Interfaces;
+using Tess.Desktop.Core.Services;
+using Tess.Desktop.Win.Services;
+using Tess.Desktop.Win.Views;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
+using Tess.Shared.Win32;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -19,7 +19,7 @@ using System.Web;
 using System.Windows;
 using Form = System.Windows.Forms.Form;
 
-namespace Remotely.Desktop.Win
+namespace Tess.Desktop.Win
 {
     /// <summary>
     /// Interaction logic for App.xaml

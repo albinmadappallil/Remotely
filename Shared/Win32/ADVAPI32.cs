@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace Remotely.Shared.Win32
+namespace Tess.Shared.Win32
 {
     public static class ADVAPI32
     {

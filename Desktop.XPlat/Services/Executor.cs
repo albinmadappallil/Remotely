@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Remotely.Desktop.XPlat.Services
+namespace Tess.Desktop.XPlat.Services
 {
     public class Executor : ICommand
     {

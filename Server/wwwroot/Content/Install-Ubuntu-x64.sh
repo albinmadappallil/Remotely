@@ -11,9 +11,9 @@ ArgLength=${#Args[@]}
 for (( i=0; i<${ArgLength}; i+=2 ));
 do
     if [ "${Args[$i]}" = "--uninstall" ]; then
-        systemctl stop remotely-agent
-        rm -r -f /usr/local/bin/Remotely
-        rm -f /etc/systemd/system/remotely-agent.service
+        systemctl stop Tess-agent
+        rm -r -f /usr/local/bin/Tess
+        rm -f /etc/systemd/system/Tess-agent.service
         systemctl daemon-reload
         exit
     elif [ "${Args[$i]}" = "--path" ]; then
@@ -42,32 +42,32 @@ apt-get -y install jq
 apt-get -y install curl
 
 
-if [ -f "/usr/local/bin/Remotely/ConnectionInfo.json" ]; then
-    SavedGUID=`cat "/usr/local/bin/Remotely/ConnectionInfo.json" | jq -r '.DeviceID'`
+if [ -f "/usr/local/bin/Tess/ConnectionInfo.json" ]; then
+    SavedGUID=`cat "/usr/local/bin/Tess/ConnectionInfo.json" | jq -r '.DeviceID'`
      if [[ "$SavedGUID" != "null" && -n "$SavedGUID" ]]; then
         GUID="$SavedGUID"
     fi
 fi
 
-rm -r -f /usr/local/bin/Remotely
-rm -f /etc/systemd/system/remotely-agent.service
+rm -r -f /usr/local/bin/Tess
+rm -f /etc/systemd/system/Tess-agent.service
 
-mkdir -p /usr/local/bin/Remotely/
-cd /usr/local/bin/Remotely/
+mkdir -p /usr/local/bin/Tess/
+cd /usr/local/bin/Tess/
 
 if [ -z "$UpdatePackagePath" ]; then
-    echo  "Downloading client..." >> /tmp/Remotely_Install.log
-    wget $HostName/Content/Remotely-Linux.zip
+    echo  "Downloading client..." >> /tmp/Tess_Install.log
+    wget $HostName/Content/Tess-Linux.zip
 else
-    echo  "Copying install files..." >> /tmp/Remotely_Install.log
-    cp "$UpdatePackagePath" /usr/local/bin/Remotely/Remotely-Linux.zip
+    echo  "Copying install files..." >> /tmp/Tess_Install.log
+    cp "$UpdatePackagePath" /usr/local/bin/Tess/Tess-Linux.zip
     rm -f "$UpdatePackagePath"
 fi
 
-unzip ./Remotely-Linux.zip
-rm -f ./Remotely-Linux.zip
-chmod +x ./Remotely_Agent
-chmod +x ./Desktop/Remotely_Desktop
+unzip ./Tess-Linux.zip
+rm -f ./Tess-Linux.zip
+chmod +x ./Tess_Agent
+chmod +x ./Desktop/Tess_Desktop
 
 
 connectionInfo="{
@@ -79,16 +79,16 @@ connectionInfo="{
 
 echo "$connectionInfo" > ./ConnectionInfo.json
 
-curl --head $HostName/Content/Remotely-Linux.zip | grep -i "etag" | cut -d' ' -f 2 > ./etag.txt
+curl --head $HostName/Content/Tess-Linux.zip | grep -i "etag" | cut -d' ' -f 2 > ./etag.txt
 
-echo Creating service... >> /tmp/Remotely_Install.log
+echo Creating service... >> /tmp/Tess_Install.log
 
 serviceConfig="[Unit]
-Description=The Remotely agent used for remote access.
+Description=The Tess agent used for remote access.
 
 [Service]
-WorkingDirectory=/usr/local/bin/Remotely/
-ExecStart=/usr/local/bin/Remotely/Remotely_Agent
+WorkingDirectory=/usr/local/bin/Tess/
+ExecStart=/usr/local/bin/Tess/Tess_Agent
 Restart=always
 StartLimitIntervalSec=0
 RestartSec=10
@@ -96,9 +96,9 @@ RestartSec=10
 [Install]
 WantedBy=graphical.target"
 
-echo "$serviceConfig" > /etc/systemd/system/remotely-agent.service
+echo "$serviceConfig" > /etc/systemd/system/Tess-agent.service
 
-systemctl enable remotely-agent
-systemctl restart remotely-agent
+systemctl enable Tess-agent
+systemctl restart Tess-agent
 
-echo Install complete. >> /tmp/Remotely_Install.log
+echo Install complete. >> /tmp/Tess_Install.log

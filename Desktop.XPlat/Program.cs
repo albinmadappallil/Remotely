@@ -1,12 +1,12 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
-using Remotely.Desktop.Core;
-using Remotely.Shared.Utilities;
+using Tess.Desktop.Core;
+using Tess.Shared.Utilities;
 using System;
 using System.Threading;
 
-namespace Remotely.Desktop.XPlat
+namespace Tess.Desktop.XPlat
 {
     class Program
     {

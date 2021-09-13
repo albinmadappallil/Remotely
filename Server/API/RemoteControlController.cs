@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Remotely.Server.Attributes;
-using Remotely.Server.Hubs;
-using Remotely.Server.Models;
-using Remotely.Server.Services;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Models;
+using Tess.Server.Attributes;
+using Tess.Server.Hubs;
+using Tess.Server.Models;
+using Tess.Server.Services;
+using Tess.Shared.Utilities;
+using Tess.Shared.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Remotely.Server.Auth;
+using Tess.Server.Auth;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Remotely.Server.API
+namespace Tess.Server.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,7 +23,7 @@ namespace Remotely.Server.API
         public RemoteControlController(IDataService dataService,
             IHubContext<AgentHub> agentHub,
             IApplicationConfig appConfig,
-            SignInManager<RemotelyUser> signInManager)
+            SignInManager<TessUser> signInManager)
         {
             DataService = dataService;
             AgentHubContext = agentHub;
@@ -34,7 +34,7 @@ namespace Remotely.Server.API
         public IDataService DataService { get; }
         public IHubContext<AgentHub> AgentHubContext { get; }
         public IApplicationConfig AppConfig { get; }
-        public SignInManager<RemotelyUser> SignInManager { get; }
+        public SignInManager<TessUser> SignInManager { get; }
 
         [HttpGet("{deviceID}")]
         [ServiceFilter(typeof(ApiAuthorizationFilter))]

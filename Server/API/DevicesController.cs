@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Remotely.Server.Auth;
-using Remotely.Server.Services;
-using Remotely.Shared.Models;
+using Tess.Server.Auth;
+using Tess.Server.Services;
+using Tess.Shared.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Remotely.Server.API
+namespace Tess.Server.API
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Remotely.Desktop.Core;
-using Remotely.Desktop.Core.Interfaces;
-using Remotely.Desktop.Core.Services;
-using Remotely.Desktop.Core.Utilities;
-using Remotely.Shared.Utilities;
+using Tess.Desktop.Core;
+using Tess.Desktop.Core.Interfaces;
+using Tess.Desktop.Core.Services;
+using Tess.Desktop.Core.Utilities;
+using Tess.Shared.Utilities;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 
-namespace Remotely.Desktop.Win.Services
+namespace Tess.Desktop.Win.Services
 {
     public class SessionIndicatorWin : ISessionIndicator
     {

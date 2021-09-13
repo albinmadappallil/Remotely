@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
-using Remotely.Shared.Utilities;
+using Tess.Shared.Utilities;
 
-namespace Remotely.Shared.Services
+namespace Tess.Shared.Services
 {
     public interface IProcessInvoker
     {

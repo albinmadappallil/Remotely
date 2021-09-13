@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Remotely.Tests.LoadTester
+namespace Tess.Tests.LoadTester
 {
     public class CommandLineParser
     {

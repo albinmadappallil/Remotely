@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR;
-using Remotely.Server.Hubs;
-using Remotely.Server.Migrations.PostgreSql;
-using Remotely.Server.Migrations.Sqlite;
-using Remotely.Server.Migrations.SqlServer;
-using Remotely.Server.Pages;
-using Remotely.Server.Services;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
+using Tess.Server.Hubs;
+using Tess.Server.Migrations.PostgreSql;
+using Tess.Server.Migrations.Sqlite;
+using Tess.Server.Migrations.SqlServer;
+using Tess.Server.Pages;
+using Tess.Server.Services;
+using Tess.Shared.Enums;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Components.Scripts
+namespace Tess.Server.Components.Scripts
 {
     [Authorize]
     public partial class RunScript : AuthComponentBase

@@ -1,12 +1,12 @@
-﻿using Remotely.Desktop.Core.ViewModels;
-using Remotely.Desktop.Win.Services;
+﻿using Tess.Desktop.Core.ViewModels;
+using Tess.Desktop.Win.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Remotely.Desktop.Win.ViewModels
+namespace Tess.Desktop.Win.ViewModels
 {
     public class PromptForAccessWindowViewModel : BrandedViewModelBase
     {

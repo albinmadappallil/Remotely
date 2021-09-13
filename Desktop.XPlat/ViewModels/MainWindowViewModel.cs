@@ -3,15 +3,15 @@ using Avalonia.Controls;
 using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
-using Remotely.Desktop.Core;
-using Remotely.Desktop.Core.Interfaces;
-using Remotely.Desktop.Core.Services;
-using Remotely.Desktop.XPlat.Controls;
-using Remotely.Desktop.XPlat.Native.Linux;
-using Remotely.Desktop.XPlat.Services;
-using Remotely.Desktop.XPlat.Views;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
+using Tess.Desktop.Core;
+using Tess.Desktop.Core.Interfaces;
+using Tess.Desktop.Core.Services;
+using Tess.Desktop.XPlat.Controls;
+using Tess.Desktop.XPlat.Native.Linux;
+using Tess.Desktop.XPlat.Services;
+using Tess.Desktop.XPlat.Views;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -19,7 +19,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Remotely.Desktop.XPlat.ViewModels
+namespace Tess.Desktop.XPlat.ViewModels
 {
     public class MainWindowViewModel : BrandedViewModelBase
     {
@@ -241,7 +241,7 @@ namespace Remotely.Desktop.XPlat.ViewModels
                 (serverUri.Scheme != Uri.UriSchemeHttp && serverUri.Scheme != Uri.UriSchemeHttps))
             {
                 Logger.Write("Server URL is not valid.");
-                await MessageBox.Show("Server URL must be a valid Uri (e.g. https://app.remotely.one).", "Invalid Server URL", MessageBoxType.OK);
+                await MessageBox.Show("Server URL must be a valid Uri (e.g. https://app.Tess.one).", "Invalid Server URL", MessageBoxType.OK);
                 return;
             }
 

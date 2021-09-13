@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Remotely.Server.Enums;
-using Remotely.Server.Hubs;
-using Remotely.Server.Models;
-using Remotely.Server.Services;
-using Remotely.Shared.Attributes;
-using Remotely.Shared.Models;
+using Tess.Server.Enums;
+using Tess.Server.Hubs;
+using Tess.Server.Models;
+using Tess.Server.Services;
+using Tess.Shared.Attributes;
+using Tess.Shared.Models;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -18,7 +18,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Components.Devices
+namespace Tess.Server.Components.Devices
 {
     [Authorize]
     public partial class DevicesFrame : AuthComponentBase, IDisposable

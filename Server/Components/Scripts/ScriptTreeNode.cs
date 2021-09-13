@@ -1,11 +1,11 @@
-﻿using Remotely.Server.Components.TreeView;
-using Remotely.Shared.Models;
+﻿using Tess.Server.Components.TreeView;
+using Tess.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Components.Scripts
+namespace Tess.Server.Components.Scripts
 {
     public class ScriptTreeNode
     {

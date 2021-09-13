@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Services
+namespace Tess.Server.Services
 {
     public interface IJsInterop
     {

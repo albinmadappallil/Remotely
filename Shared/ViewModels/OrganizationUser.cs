@@ -1,4 +1,4 @@
-﻿namespace Remotely.Shared.ViewModels
+﻿namespace Tess.Shared.ViewModels
 {
     public class OrganizationUser
     {

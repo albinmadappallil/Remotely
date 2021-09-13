@@ -1,9 +1,9 @@
-﻿using Remotely.Shared.Enums;
+﻿using Tess.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace Remotely.Shared.Models
+namespace Tess.Shared.Models
 {
-    public class RemotelyUserOptions
+    public class TessUserOptions
     {
         [Display(Name = "Display Name")]
         [StringLength(100)]

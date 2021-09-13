@@ -1,8 +1,8 @@
-﻿using Remotely.Desktop.Core;
-using Remotely.Desktop.Core.Services;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
+﻿using Tess.Desktop.Core;
+using Tess.Desktop.Core.Services;
+using Tess.Shared.Enums;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml;
 
-namespace Remotely.Desktop.Win.Services
+namespace Tess.Desktop.Win.Services
 {
     public interface IClickOnceService
     {

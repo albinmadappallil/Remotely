@@ -1,8 +1,8 @@
-# Remotely
+# Tess
 A remote control and remote scripting solution, built with .NET 5, Blazor, SignalR Core, and WebRTC.
 
-[![Build Status](https://dev.azure.com/translucency/Remotely/_apis/build/status/Remotely-ReleaseBuild?branchName=master)](https://dev.azure.com/translucency/Remotely/_build/latest?definitionId=17&branchName=master)
-![GitHub Build](https://github.com/lucent-sea/Remotely/workflows/GitHub%20Build/badge.svg)
+[![Build Status](https://dev.azure.com/translucency/Tess/_apis/build/status/Tess-ReleaseBuild?branchName=master)](https://dev.azure.com/translucency/Tess/_build/latest?definitionId=17&branchName=master)
+![GitHub Build](https://github.com/lucent-sea/Tess/workflows/GitHub%20Build/badge.svg)
 
 
 > ## Repo is "On Pause"
@@ -23,19 +23,19 @@ You can also sponsor the project as a way of saying "thank you".  But if you hav
 
 
 ## Project Links
-Public Server: https://remotely.lucency.co  
-Website: https://remotely-info.lucency.co  
-Subreddit: https://www.reddit.com/r/remotely_app/  
-Docker: https://hub.docker.com/r/translucency/remotely  
-Video Tutorials: https://remotely-info.lucency.co/Tutorials  
+Public Server: https://Tess.lucency.co  
+Website: https://Tess-info.lucency.co  
+Subreddit: https://www.reddit.com/r/Tess_app/  
+Docker: https://hub.docker.com/r/translucency/Tess  
+Video Tutorials: https://Tess-info.lucency.co/Tutorials  
 
-![image](https://remotely-info.lucency.co/media/ask-remote.png)
+![image](https://Tess-info.lucency.co/media/ask-remote.png)
 
 ## Disclaimer
-Hosting a Remotely server requires running an ASP.NET Core web app behind IIS (Windows), Nginx (Ubuntu), or Caddy Server (any OS).  It's expected that the person deploying and maintaining the server is familiar with this process.  Since this is a hobby project that I develop in between working full time and raising a family, there simply isn't time available to provide support in this capacity.
+Hosting a Tess server requires running an ASP.NET Core web app behind IIS (Windows), Nginx (Ubuntu), or Caddy Server (any OS).  It's expected that the person deploying and maintaining the server is familiar with this process.  Since this is a hobby project that I develop in between working full time and raising a family, there simply isn't time available to provide support in this capacity.
 
 ## GitHub Actions
-GitHub Actions allows you to build and deploy Remotely for free from their cloud servers.  Since the Windows agent can only be built on Windows, and the Mac agent can only be built on Mac, using a build platform like GitHub Actions or Azure Pipelines is the only reasonable way to build the whole project.  The definitions for the build processes are located in `/.github/workflows/` folder.
+GitHub Actions allows you to build and deploy Tess for free from their cloud servers.  Since the Windows agent can only be built on Windows, and the Mac agent can only be built on Mac, using a build platform like GitHub Actions or Azure Pipelines is the only reasonable way to build the whole project.  The definitions for the build processes are located in `/.github/workflows/` folder.
 
 I've created a cross-platform command line tool that can leverage the GitHub Actions REST API to build the project and install it on your private server.  This process will also embed your server's URL into the desktop clients, so that they won't need to prompt the end user to enter it.
 
@@ -45,9 +45,9 @@ However, you can also choose to install the pre-built packages that do not have 
 
 ## Installation Instructions:
 - Before attempting installation, verify that your domain name is resolving to your server's IP address.
-  - For example, I can use the command `ping remotely.lucency.co` and see the IP address to which it resolves.
-- Find and download the `Remotely_Server_Installer[.exe]` CLI tool for the latest release on the [Releases page](https://github.com/lucent-sea/Remotely/releases).
-  - You will run it on the server where you'll be hosting Remotely.
+  - For example, I can use the command `ping Tess.lucency.co` and see the IP address to which it resolves.
+- Find and download the `Tess_Server_Installer[.exe]` CLI tool for the latest release on the [Releases page](https://github.com/lucent-sea/Tess/releases).
+  - You will run it on the server where you'll be hosting Tess.
   - You need to run it with elevation (e.g. sudo or "Run as admin").
   - Use `--help` argument to see all the command line arguments.
     - If values are provided for all arguments, it will run non-interactive.
@@ -59,9 +59,9 @@ However, you can also choose to install the pre-built packages that do not have 
   - If you've already forked the repo and haven't updated your fork recently, you'll need to do so first.
   - You can use the following commands to pull the latest changes, merge them, and push them back up to your repo ([git](https://git-scm.com/downloads) required).  Make sure to replace `{your-username}` with your GitHub username.  This example assumes you've added your SSH key to your GitHub account.
 	```
-	git clone git@github.com:{your-username}/remotely
-	cd ./remotely
-	git remote add upstream https://github.com/lucent-sea/remotely
+	git clone git@github.com:{your-username}/Tess
+	cd ./Tess
+	git remote add upstream https://github.com/lucent-sea/Tess
 	git pull upstream master
 	git push origin master
 	```
@@ -83,7 +83,7 @@ However, you can also choose to install the pre-built packages that do not have 
   - For Windows IIS, you'll need to use a separate program that integrates with Let's Encrypt.
     - Resources: https://letsencrypt.org/docs/client-options/#clients-windows-/-iis
 - By default, SQLite is used for the database.
-    - The "Remotely.db" database file is automatically created in the root folder of your site.
+    - The "Tess.db" database file is automatically created in the root folder of your site.
 	- You can browse and modify the contents using [DB Browser for SQLite](https://sqlitebrowser.org/).
 - Create your account by clicking the `Register` button on the main page.
   - This account will be both the server admin and organization admin.
@@ -99,7 +99,7 @@ However, you can also choose to install the pre-built packages that do not have 
 	* Run one of the GitHub Actions workflows, then copy the ZIP contents to the site's content folder.
 	* Build from source as described above and `rsync`/`robocopy` the output files to the server directory.
 	* Build from source and deploy to IIS (e.g. `dotnet publish /p:PublishProfile=MyProfile`)
-* For Linux, you'll need to restart the Remotely service in systemd after overwriting the files.
+* For Linux, you'll need to restart the Tess service in systemd after overwriting the files.
 * For Windows, you'll need to shut down the site's Application Pool in IIS before copying the files.
 	* Windows won't let you overwrite files that are in use.
 * The only things that shouldn't be overwritten are the database DB file (if using SQLite) and the `appsettings.Production.json`.  These files should never exist in the publish output.
@@ -110,7 +110,7 @@ There are countless ways to host an ASP.NET Core app, and I can't document or au
 
 
 ## Build and Debug Instructions (Windows 10)  
-The following steps will configure your Windows 10 machine for building the Remotely server and clients.
+The following steps will configure your Windows 10 machine for building the Tess server and clients.
 * Install Visual Studio 2019.
     * Link: https://visualstudio.microsoft.com/downloads/
 	* You should have the following Workloads selected:
@@ -127,7 +127,7 @@ The following steps will configure your Windows 10 machine for building the Remo
     * Link: https://git-scm.com/downloads
 * Install the latest LTS Node:
 	* Link: https://nodejs.org/
-* Clone the git repository: `git clone https://github.com/lucent-sea/remotely`
+* Clone the git repository: `git clone https://github.com/lucent-sea/Tess`
 * When debugging, the agent will use a pre-defined device ID and connect to https://localhost:5001.
 * In development environment, the server will assign all connecting agents to the first organization.
 * The above two allow you to debug the agent and server together, and see your device in the list.
@@ -161,7 +161,7 @@ For more information on configuring ASP.NET Core, see https://docs.microsoft.com
 * EnableWindowsEventLog: Whether to also add server log entries to the Windows Event Log.
 * EnforceAttendedAccess: Clients will be prompted to allow unattended remote control attempts.
 * IceServers: The ICE (STUN/TURN) servers to use for WebRTC.
-* KnownProxies: If your reverse proxy is on a different machine and is forwarding requests to the Remotely server, you will need to add the IP of the reverse proxy server to this array.
+* KnownProxies: If your reverse proxy is on a different machine and is forwarding requests to the Tess server, you will need to add the IP of the reverse proxy server to this array.
 * MaxOrganizationCount: By default, one organization can exist on the server, which is created automatically when the first account is registered.  Afterward, self-registration will be disabled.
     * Set this to -1 or increase it to a specific number to allow multi-tenancy.
 * RedirectToHttps: Whether ASP.NET Core will redirect all traffic from HTTP to HTTPS.  This is independent of Caddy, Nginx, and IIS configurations that do the same.
@@ -178,13 +178,13 @@ For more information on configuring ASP.NET Core, see https://docs.microsoft.com
 
 
 ## Changing the Database
-By default, Remotely uses a SQLite database.  When first run, it creates a file as specified for the SQLite connection string in appsettings.json.
+By default, Tess uses a SQLite database.  When first run, it creates a file as specified for the SQLite connection string in appsettings.json.
 
 You can change database by changing `DBProvider` in `ApplicationOptions` to `SQLServer` or `PostgreSQL`.  Be sure to set the connection string for the new database provider in the server's `appsettings.Production.json`.
 
 ## Logging
-* On clients, logs are kept in %temp%\Remotely_Logs.log.
-	* For the Agent running as a Windows service, this maps to C:\Windows\Temp\Remotely_Logs.log.
+* On clients, logs are kept in %temp%\Tess_Logs.log.
+	* For the Agent running as a Windows service, this maps to C:\Windows\Temp\Tess_Logs.log.
 * On the server, some event information is explicitly written to the EventLogs table in the database.
 * Built-in ASP.NET Core logs are written to the console (stdout).  You can redirect this to a file if desired.
 	* In IIS, this can be done in the web.config file by setting stdoutLogEnabled to true.
@@ -215,7 +215,7 @@ Ideally, you'd be doing remote control from an actual computer or laptop.  Howev
 ## End User Support Page
 There's a page at `/GetSupport` where end users can request support.  When the form is submitted, an alert appears on the main page, above the grid.
 
-A shortcut to this page is placed in the `\Program Files\Remotely\` folder.  You can copy it anywhere you like.  You can also have it copied to the desktop automatically by using the `-supportshortcut` switch on the installer.
+A shortcut to this page is placed in the `\Program Files\Tess\` folder.  You can copy it anywhere you like.  You can also have it copied to the desktop automatically by using the `-supportshortcut` switch on the installer.
 	
 ## .NET Deployments
 * .NET has two methods of deployment: framework-dependent and self-contained.
@@ -232,7 +232,7 @@ There are a few shortcut keys available when using the console.
 * Ctrl + Q: Clear the output window.
 
 ## Port Configuration
-You can change the local port that the Remotely .NET server listens on by adding the below to `appsettings.Production.json`:
+You can change the local port that the Tess .NET server listens on by adding the below to `appsettings.Production.json`:
 
 ```
 "Kestrel": {
@@ -244,14 +244,14 @@ You can change the local port that the Remotely .NET server listens on by adding
   }
 ```
 
-Alternatively, you can use a command-line argument for the `Remotely_Server` process or set an environment variable.
+Alternatively, you can use a command-line argument for the `Tess_Server` process or set an environment variable.
   - `--urls http://localhost:{port-number}`
   - `ASPNETCORE_URLS=http://localhost:{port-number}`
 
 ## API and Integrations
-Remotely has a basic API, which can be browsed at https://remotely.lucency.co/swagger (or your own server instance).  Most endpoints require authentication via an API access token, which can be created by going to Account - API Access.
+Tess has a basic API, which can be browsed at https://Tess.lucency.co/swagger (or your own server instance).  Most endpoints require authentication via an API access token, which can be created by going to Account - API Access.
 
-When accessing the API from the browser on another website, you'll need to set up CORS in appsettings by adding the website origin URL to the TrustedCorsOrigins array.  If you're not familiar with how CORS works, I recommend reading up on it before proceeding.  For example, if I wanted to create a login form on https://lucency.co that logged into the Remotely API, I'd need to add "https://lucency.co" to the TrustedCorsOrigins.
+When accessing the API from the browser on another website, you'll need to set up CORS in appsettings by adding the website origin URL to the TrustedCorsOrigins array.  If you're not familiar with how CORS works, I recommend reading up on it before proceeding.  For example, if I wanted to create a login form on https://lucency.co that logged into the Tess API, I'd need to add "https://lucency.co" to the TrustedCorsOrigins.
 
 The API key and secret must be added to the request's Authorization header in the following format: [ApiKey]:[ApiSecret]
 
@@ -315,9 +315,9 @@ Below are examples of using the cookie-based login API (JavaScript):
 	})
 
 ## Alerts
-The Alerts API gives you the ability to add monitoring and alerting functionality to your device endpoints.  This feature is intended to add basic RMM-type functionality without diverging too far from Remotely's primary purpose.
+The Alerts API gives you the ability to add monitoring and alerting functionality to your device endpoints.  This feature is intended to add basic RMM-type functionality without diverging too far from Tess's primary purpose.
 
-Alerts can be set up to show a notification on the Remotely website, send an email, and/or perform a separate API request.
+Alerts can be set up to show a notification on the Tess website, send an email, and/or perform a separate API request.
 
 To use Alerts, you'd first need to make an API token (or multiple tokens) for your devices to use.  Then create a scheduled task or some other recurring script to do the work.  Below is an example of how to use PowerShell to create a Scheduled Job that checks the disk space on a daily schedule.
 

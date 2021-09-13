@@ -1,9 +1,9 @@
-﻿using Remotely.Shared.Utilities;
+﻿using Tess.Shared.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Timers;
 
-namespace Remotely.Desktop.Core.Services
+namespace Tess.Desktop.Core.Services
 {
     public class IdleTimer
     {

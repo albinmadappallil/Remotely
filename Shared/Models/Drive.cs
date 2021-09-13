@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Remotely.Shared.Models
+namespace Tess.Shared.Models
 {
     public class Drive
     {

@@ -1,5 +1,5 @@
 ﻿using NAudio.Wave;
-using Remotely.Desktop.Core.Interfaces;
+using Tess.Desktop.Core.Interfaces;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace Remotely.Desktop.Win.Services
+namespace Tess.Desktop.Win.Services
 {
     public class AudioCapturerWin : IAudioCapturer
     {

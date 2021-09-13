@@ -1,4 +1,4 @@
-﻿namespace Remotely.Desktop.Core.Services
+﻿namespace Tess.Desktop.Core.Services
 {
     public interface IWebRtcSessionFactory
     {

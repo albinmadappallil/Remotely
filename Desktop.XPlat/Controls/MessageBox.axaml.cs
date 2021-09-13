@@ -2,13 +2,13 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Remotely.Desktop.XPlat.ViewModels;
-using Remotely.Shared.Utilities;
+using Tess.Desktop.XPlat.ViewModels;
+using Tess.Shared.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Remotely.Desktop.XPlat.Controls
+namespace Tess.Desktop.XPlat.Controls
 {
     public class MessageBox : Window
     {

@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Remotely.Server.Hubs;
-using Remotely.Server.Services;
-using Remotely.Shared.Enums;
-using Remotely.Shared.ViewModels;
+using Tess.Server.Hubs;
+using Tess.Server.Services;
+using Tess.Shared.Enums;
+using Tess.Shared.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Components.Devices
+namespace Tess.Server.Components.Devices
 {
     public partial class ChatFrame : AuthComponentBase, IDisposable
     {

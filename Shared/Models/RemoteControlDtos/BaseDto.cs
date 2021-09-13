@@ -1,7 +1,7 @@
-﻿using Remotely.Shared.Enums;
+﻿using Tess.Shared.Enums;
 using System.Runtime.Serialization;
 
-namespace Remotely.Shared.Models.RemoteControlDtos
+namespace Tess.Shared.Models.RemoteControlDtos
 {
     [DataContract]
     public class BaseDto

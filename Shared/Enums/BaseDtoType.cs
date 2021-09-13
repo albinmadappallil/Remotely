@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Remotely.Shared.Enums
+namespace Tess.Shared.Enums
 {
     [DataContract]
     public enum BaseDtoType

@@ -1,14 +1,14 @@
 ﻿using MessagePack;
-using Remotely.Desktop.Core.Enums;
-using Remotely.Desktop.Core.Interfaces;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models.RemoteControlDtos;
-using Remotely.Shared.Utilities;
+using Tess.Desktop.Core.Enums;
+using Tess.Desktop.Core.Interfaces;
+using Tess.Shared.Enums;
+using Tess.Shared.Models.RemoteControlDtos;
+using Tess.Shared.Utilities;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Remotely.Desktop.Core.Services
+namespace Tess.Desktop.Core.Services
 {
     public interface IDtoMessageHandler
     {

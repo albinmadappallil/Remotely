@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Remotely.Desktop.Core.Enums;
-using Remotely.Desktop.Core.Interfaces;
-using Remotely.Desktop.Core.Models;
-using Remotely.Desktop.Core.Utilities;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Models;
+using Tess.Desktop.Core.Enums;
+using Tess.Desktop.Core.Interfaces;
+using Tess.Desktop.Core.Models;
+using Tess.Desktop.Core.Utilities;
+using Tess.Shared.Utilities;
+using Tess.Shared.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace Remotely.Desktop.Core.Services
+namespace Tess.Desktop.Core.Services
 {
     public interface IScreenCaster
     {

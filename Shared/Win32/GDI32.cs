@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Remotely.Shared.Win32
+namespace Tess.Shared.Win32
 {
     public static class GDI32
     {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
-using Remotely.Agent.Extensions;
-using Remotely.Agent.Interfaces;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Win32;
+using Tess.Agent.Extensions;
+using Tess.Agent.Interfaces;
+using Tess.Shared.Enums;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
+using Tess.Shared.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +17,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace Remotely.Agent.Services
+namespace Tess.Agent.Services
 {
     public class AgentSocket
     {
@@ -453,7 +453,7 @@ namespace Remotely.Agent.Services
                     }
 
                     Logger.Write($"File upload started by {requesterID}.");
-                    var sharedFilePath = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "RemotelySharedFiles")).FullName;
+                    var sharedFilePath = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "TessSharedFiles")).FullName;
 
                     foreach (var fileID in fileIDs)
                     {

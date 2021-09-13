@@ -1,6 +1,6 @@
 ﻿using System.IO.Pipes;
 
-namespace Remotely.Agent.Models
+namespace Tess.Agent.Models
 {
     public class ChatSession
     {

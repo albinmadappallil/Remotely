@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Remotely.Server.Components;
-using Remotely.Server.Hubs;
-using Remotely.Server.Services;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models;
+using Tess.Server.Components;
+using Tess.Server.Hubs;
+using Tess.Server.Services;
+using Tess.Shared.Enums;
+using Tess.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +19,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Pages
+namespace Tess.Server.Pages
 {
     public class AppSettingsModel
     {
@@ -137,7 +137,7 @@ namespace Remotely.Server.Pages
         private string _trustedCorsOriginSelected;
         private string _trustedCorsOriginToAdd;
 
-        private readonly List<RemotelyUser> _userList = new();
+        private readonly List<TessUser> _userList = new();
 
 
         [Inject]
@@ -170,7 +170,7 @@ namespace Remotely.Server.Pages
         [Inject]
         private IToastService ToastService { get; set; }
         private int TotalDevices => DataService.GetTotalDevices();
-        private IEnumerable<RemotelyUser> UserList
+        private IEnumerable<TessUser> UserList
         {
             get
             {
@@ -318,7 +318,7 @@ namespace Remotely.Server.Pages
         {
             await SaveInputToAppSettings();
 
-            var success = await EmailSender.SendEmailAsync(User.Email, "Remotely Test Email", "Congratulations! Your SMTP settings are working!", User.OrganizationID);
+            var success = await EmailSender.SendEmailAsync(User.Email, "Tess Test Email", "Congratulations! Your SMTP settings are working!", User.OrganizationID);
             if (success)
             {
                 ToastService.ShowToast($"Test email sent to {User.Email}.  Check your inbox (or spam folder).");
@@ -362,7 +362,7 @@ namespace Remotely.Server.Pages
 
             await System.IO.File.WriteAllTextAsync(savePath, JsonSerializer.Serialize(settingsJson, new JsonSerializerOptions() { WriteIndented = true }));
         }
-        private void SetIsServerAdmin(ChangeEventArgs ev, RemotelyUser user)
+        private void SetIsServerAdmin(ChangeEventArgs ev, TessUser user)
         {
             var isAdmin = (bool)ev.Value;
             DataService.SetIsServerAdmin(user.Id, isAdmin, User.Id);

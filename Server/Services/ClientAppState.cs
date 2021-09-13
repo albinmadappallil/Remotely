@@ -1,13 +1,13 @@
-﻿using Remotely.Server.Enums;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models;
-using Remotely.Shared.ViewModels;
+﻿using Tess.Server.Enums;
+using Tess.Shared.Enums;
+using Tess.Shared.Models;
+using Tess.Shared.ViewModels;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Services
+namespace Tess.Server.Services
 {
     public interface IClientAppState : INotifyPropertyChanged, IInvokePropertyChanged
     {

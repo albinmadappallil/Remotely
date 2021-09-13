@@ -1,4 +1,4 @@
-﻿namespace Remotely.Shared.Models
+﻿namespace Tess.Shared.Models
 {
     public class ChatMessage
     {

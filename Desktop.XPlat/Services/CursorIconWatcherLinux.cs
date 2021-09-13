@@ -1,9 +1,9 @@
-﻿using Remotely.Desktop.Core.Interfaces;
-using Remotely.Shared.Models;
+﻿using Tess.Desktop.Core.Interfaces;
+using Tess.Shared.Models;
 using System;
 using System.Drawing;
 
-namespace Remotely.Desktop.XPlat.Services
+namespace Tess.Desktop.XPlat.Services
 {
     public class CursorIconWatcherLinux : ICursorIconWatcher
     {

@@ -1,8 +1,8 @@
-using Remotely.Agent.Installer.Win.Models;
-using Remotely.Agent.Installer.Win.Services;
-using Remotely.Agent.Installer.Win.Utilities;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Models;
+using Tess.Agent.Installer.Win.Models;
+using Tess.Agent.Installer.Win.Services;
+using Tess.Agent.Installer.Win.Utilities;
+using Tess.Shared.Utilities;
+using Tess.Shared.Models;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -19,7 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Net;
 
-namespace Remotely.Agent.Installer.Win.ViewModels
+namespace Tess.Agent.Installer.Win.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
@@ -117,7 +117,7 @@ namespace Remotely.Agent.Installer.Win.ViewModels
             {
                 return new Executor(param =>
                 {
-                    var logPath = Path.Combine(Path.GetTempPath(), "Remotely_Installer.log");
+                    var logPath = Path.Combine(Path.GetTempPath(), "Tess_Installer.log");
                     if (File.Exists(logPath))
                     {
                         Process.Start(logPath);
@@ -205,7 +205,7 @@ namespace Remotely.Agent.Installer.Win.ViewModels
                 Progress = arg;
             };
 
-            IsServiceInstalled = ServiceController.GetServices().Any(x => x.ServiceName == "Remotely_Service");
+            IsServiceInstalled = ServiceController.GetServices().Any(x => x.ServiceName == "Tess_Service");
             if (IsServiceMissing)
             {
                 HeaderMessage = $"Install the {ProductName} service.";
@@ -239,7 +239,7 @@ namespace Remotely.Agent.Installer.Win.ViewModels
                 var connectionInfoPath = Path.Combine(
                Path.GetPathRoot(Environment.SystemDirectory),
                    "Program Files",
-                   "Remotely",
+                   "Tess",
                    "ConnectionInfo.json");
 
                 if (File.Exists(connectionInfoPath))
@@ -269,7 +269,7 @@ namespace Remotely.Agent.Installer.Win.ViewModels
         {
             try
             {
-                ProductName = "Remotely";
+                ProductName = "Tess";
 
                 if (!string.IsNullOrWhiteSpace(brandingInfo?.Product))
                 {
@@ -335,7 +335,7 @@ namespace Remotely.Agent.Installer.Win.ViewModels
                 (serverUri.Scheme != Uri.UriSchemeHttp && serverUri.Scheme != Uri.UriSchemeHttps))
             {
                 Logger.Write("ServerUrl is not valid.");
-                MessageBoxEx.Show("Server URL must be a valid Uri (e.g. https://app.remotely.one).", "Invalid Server URL", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxEx.Show("Server URL must be a valid Uri (e.g. https://app.Tess.one).", "Invalid Server URL", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -447,7 +447,7 @@ namespace Remotely.Agent.Installer.Win.ViewModels
             }
             else
             {
-                imageStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Remotely.Agent.Installer.Win.Assets.Remotely_Icon.png");
+                imageStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Tess.Agent.Installer.Win.Assets.Tess_Icon.png");
             }
 
             var bitmap = new BitmapImage();
@@ -470,14 +470,14 @@ namespace Remotely.Agent.Installer.Win.ViewModels
                     return;
                 }
 
-                HeaderMessage = "Installing Remotely...";
+                HeaderMessage = "Installing Tess...";
 
                 if (await Installer.Install(ServerUrl, OrganizationID, DeviceGroup, DeviceAlias, DeviceUuid, CreateSupportShortcut))
                 {
                     IsServiceInstalled = true;
                     Progress = 0;
                     HeaderMessage = "Installation completed.";
-                    StatusMessage = "Remotely has been installed.  You can now close this window.";
+                    StatusMessage = "Tess has been installed.  You can now close this window.";
                 }
                 else
                 {
@@ -506,14 +506,14 @@ namespace Remotely.Agent.Installer.Win.ViewModels
             {
                 IsReadyState = false;
 
-                HeaderMessage = "Uninstalling Remotely...";
+                HeaderMessage = "Uninstalling Tess...";
 
                 if (await Installer.Uninstall())
                 {
                     IsServiceInstalled = false;
                     Progress = 0;
                     HeaderMessage = "Uninstall completed.";
-                    StatusMessage = "Remotely has been uninstalled.  You can now close this window.";
+                    StatusMessage = "Tess has been uninstalled.  You can now close this window.";
                 }
                 else
                 {

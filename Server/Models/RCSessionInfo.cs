@@ -1,8 +1,8 @@
-﻿using Remotely.Shared.Enums;
+﻿using Tess.Shared.Enums;
 using System;
 using System.Collections.Concurrent;
 
-namespace Remotely.Server.Models
+namespace Tess.Server.Models
 {
     public class RCSessionInfo
     {

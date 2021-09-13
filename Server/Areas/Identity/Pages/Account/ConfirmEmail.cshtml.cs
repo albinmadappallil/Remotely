@@ -8,16 +8,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Remotely.Shared.Models;
+using Tess.Shared.Models;
 
-namespace Remotely.Server.Areas.Identity.Pages.Account
+namespace Tess.Server.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<RemotelyUser> _userManager;
+        private readonly UserManager<TessUser> _userManager;
 
-        public ConfirmEmailModel(UserManager<RemotelyUser> userManager)
+        public ConfirmEmailModel(UserManager<TessUser> userManager)
         {
             _userManager = userManager;
         }

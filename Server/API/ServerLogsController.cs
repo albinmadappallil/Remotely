@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Remotely.Server.Auth;
-using Remotely.Server.Services;
+using Tess.Server.Auth;
+using Tess.Server.Services;
 using System.Text;
 using System.Text.Json;
 
-namespace Remotely.Server.API
+namespace Tess.Server.API
 {
     [Route("api/[controller]")]
     [ApiController]

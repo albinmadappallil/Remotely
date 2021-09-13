@@ -1,15 +1,15 @@
-using Remotely.Agent.Interfaces;
-using Remotely.Shared.Models;
-using Remotely.Shared.Services;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Win32;
+using Tess.Agent.Interfaces;
+using Tess.Shared.Models;
+using Tess.Shared.Services;
+using Tess.Shared.Utilities;
+using Tess.Shared.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Remotely.Agent.Services
+namespace Tess.Agent.Services
 {
     public class DeviceInformationServiceMac : DeviceInformationServiceBase, IDeviceInformationService
     {

@@ -1,7 +1,7 @@
-﻿using Remotely.Desktop.Win.ViewModels;
+﻿using Tess.Desktop.Win.ViewModels;
 using System.Windows;
 
-namespace Remotely.Desktop.Win.Views
+namespace Tess.Desktop.Win.Views
 {
     /// <summary>
     /// Interaction logic for HostNamePrompt.xaml

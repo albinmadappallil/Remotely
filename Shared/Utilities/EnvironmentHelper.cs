@@ -1,8 +1,8 @@
-﻿using Remotely.Shared.Enums;
+﻿using Tess.Shared.Enums;
 using System;
 using System.Diagnostics;
 
-namespace Remotely.Shared.Utilities
+namespace Tess.Shared.Utilities
 {
     public static class EnvironmentHelper
     {
@@ -13,10 +13,10 @@ namespace Remotely.Shared.Utilities
                 switch (Platform)
                 {
                     case Platform.Windows:
-                        return "Remotely_Agent.exe";
+                        return "Tess_Agent.exe";
                     case Platform.Linux:
                     case Platform.MacOS:
-                        return "Remotely_Agent";
+                        return "Tess_Agent";
                     default:
                         throw new PlatformNotSupportedException();
                 }
@@ -30,10 +30,10 @@ namespace Remotely.Shared.Utilities
                 switch (Platform)
                 {
                     case Platform.Windows:
-                        return "Remotely_Desktop.exe";
+                        return "Tess_Desktop.exe";
                     case Platform.Linux:
                     case Platform.MacOS:
-                        return "Remotely_Desktop";
+                        return "Tess_Desktop";
                     default:
                         throw new PlatformNotSupportedException();
                 }

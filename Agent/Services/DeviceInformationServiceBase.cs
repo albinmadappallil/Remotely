@@ -1,6 +1,6 @@
-﻿using Remotely.Shared.Models;
-using Remotely.Shared.Services;
-using Remotely.Shared.Utilities;
+﻿using Tess.Shared.Models;
+using Tess.Shared.Services;
+using Tess.Shared.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Remotely.Agent.Services
+namespace Tess.Agent.Services
 {
     public class DeviceInformationServiceBase
     {
@@ -73,9 +73,9 @@ namespace Remotely.Agent.Services
         {
             try
             {
-                if (File.Exists("Remotely_Agent.dll"))
+                if (File.Exists("Tess_Agent.dll"))
                 {
-                    return FileVersionInfo.GetVersionInfo("Remotely_Agent.dll").FileVersion.ToString().Trim();
+                    return FileVersionInfo.GetVersionInfo("Tess_Agent.dll").FileVersion.ToString().Trim();
                 }
             }
             catch (Exception ex)

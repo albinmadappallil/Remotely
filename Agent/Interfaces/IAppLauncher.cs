@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Remotely.Agent.Interfaces
+namespace Tess.Agent.Interfaces
 {
     public interface IAppLauncher
     {

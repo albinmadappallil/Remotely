@@ -3,9 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Remotely_Server_Installer</AssemblyName>
-    <ApplicationIcon>Remotely_Icon.ico</ApplicationIcon>
-    <RootNamespace>Remotely.Server.Installer</RootNamespace>
+    <AssemblyName>Tess_Server_Installer</AssemblyName>
+    <ApplicationIcon>Tess_Icon.ico</ApplicationIcon>
+    <RootNamespace>Tess.Server.Installer</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 

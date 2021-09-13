@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Remotely.Server.Services;
-using Remotely.Shared.Models;
+using Tess.Server.Services;
+using Tess.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Auth
+namespace Tess.Server.Auth
 {
     public class TwoFactorRequiredHandler : AuthorizationHandler<TwoFactorRequiredRequirement>
     {
-        private readonly UserManager<RemotelyUser> _userManager;
+        private readonly UserManager<TessUser> _userManager;
         private readonly IApplicationConfig _appConfig;
 
-        public TwoFactorRequiredHandler(UserManager<RemotelyUser> userManager, IApplicationConfig appConfig)
+        public TwoFactorRequiredHandler(UserManager<TessUser> userManager, IApplicationConfig appConfig)
         {
             _userManager = userManager;
             _appConfig = appConfig;

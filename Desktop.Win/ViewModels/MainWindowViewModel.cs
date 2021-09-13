@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Remotely.Desktop.Core;
-using Remotely.Desktop.Core.Interfaces;
-using Remotely.Desktop.Core.Services;
-using Remotely.Desktop.Win.Services;
-using Remotely.Desktop.Win.Views;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Win32;
+using Tess.Desktop.Core;
+using Tess.Desktop.Core.Interfaces;
+using Tess.Desktop.Core.Services;
+using Tess.Desktop.Win.Services;
+using Tess.Desktop.Win.Views;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
+using Tess.Shared.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Remotely.Desktop.Win.ViewModels
+namespace Tess.Desktop.Win.ViewModels
 {
     public class MainWindowViewModel : BrandedViewModelBase
     {
@@ -119,11 +119,11 @@ namespace Remotely.Desktop.Win.ViewModels
                         var filePath = sections.First();
                         var arguments = string.Join('"', sections.Skip(1));
                         Logger.Write($"Creating temporary service with file path {filePath} and arguments {arguments}.");
-                        psi.Arguments = $"/c sc create Remotely_Temp binPath=\"{filePath} {arguments} -elevate\"";
+                        psi.Arguments = $"/c sc create Tess_Temp binPath=\"{filePath} {arguments} -elevate\"";
                         Process.Start(psi).WaitForExit();
-                        psi.Arguments = "/c sc start Remotely_Temp";
+                        psi.Arguments = "/c sc start Tess_Temp";
                         Process.Start(psi).WaitForExit();
-                        psi.Arguments = "/c sc delete Remotely_Temp";
+                        psi.Arguments = "/c sc delete Tess_Temp";
                         Process.Start(psi).WaitForExit();
                         App.Current.Shutdown();
                     }
@@ -281,7 +281,7 @@ namespace Remotely.Desktop.Win.ViewModels
                 (serverUri.Scheme != Uri.UriSchemeHttp && serverUri.Scheme != Uri.UriSchemeHttps))
             {
                 Logger.Write("Server URL is not valid.");
-                MessageBox.Show("Server URL must be a valid Uri (e.g. https://app.remotely.one).", "Invalid Server URL", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Server URL must be a valid Uri (e.g. https://app.Tess.one).", "Invalid Server URL", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

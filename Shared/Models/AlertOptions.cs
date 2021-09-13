@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Remotely.Shared.Models
+namespace Tess.Shared.Models
 {
     public class AlertOptions
     {

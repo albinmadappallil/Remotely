@@ -1,5 +1,5 @@
-﻿using Remotely.Agent.Interfaces;
-using Remotely.Shared.Utilities;
+﻿using Tess.Agent.Interfaces;
+using Tess.Shared.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Remotely.Agent.Services
+namespace Tess.Agent.Services
 {
     
     public class UpdaterLinux : IUpdater
@@ -64,7 +64,7 @@ namespace Remotely.Agent.Services
                 var connectionInfo = _configService.GetConnectionInfo();
                 var serverUrl = _configService.GetConnectionInfo().Host;
 
-                var fileUrl = serverUrl + $"/Content/Remotely-Linux.zip";
+                var fileUrl = serverUrl + $"/Content/Tess-Linux.zip";
 
                 var lastEtag = string.Empty;
 
@@ -123,9 +123,9 @@ namespace Remotely.Agent.Services
                 Logger.Write("Service Updater: Downloading install package.");
 
                 var downloadId = Guid.NewGuid().ToString();
-                var zipPath = Path.Combine(Path.GetTempPath(), "RemotelyUpdate.zip");
+                var zipPath = Path.Combine(Path.GetTempPath(), "TessUpdate.zip");
 
-                var installerPath = Path.Combine(Path.GetTempPath(), "RemotelyUpdate.sh");
+                var installerPath = Path.Combine(Path.GetTempPath(), "TessUpdate.sh");
 
                 string platform;
 

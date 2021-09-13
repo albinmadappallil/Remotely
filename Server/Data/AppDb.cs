@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace Remotely.Server.Data
+namespace Tess.Server.Data
 {
     public class AppDb : IdentityDbContext
     {
@@ -40,7 +40,7 @@ namespace Remotely.Server.Data
         public DbSet<ScriptSchedule> ScriptSchedules { get; set; }
         public DbSet<ScriptResult> ScriptResults { get; set; }
         public DbSet<SharedFile> SharedFiles { get; set; }
-        public new DbSet<RemotelyUser> Users { get; set; }
+        public new DbSet<TessUser> Users { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -54,13 +54,13 @@ namespace Remotely.Server.Data
 
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityUser>().ToTable("RemotelyUsers");
+            builder.Entity<IdentityUser>().ToTable("TessUsers");
 
             builder.Entity<Organization>()
                 .HasMany(x => x.Devices)
                 .WithOne(x => x.Organization);
             builder.Entity<Organization>()
-                .HasMany(x => x.RemotelyUsers)
+                .HasMany(x => x.TessUsers)
                 .WithOne(x => x.Organization);
             builder.Entity<Organization>()
                 .HasMany(x => x.EventLogs)
@@ -93,29 +93,29 @@ namespace Remotely.Server.Data
                 .HasMany(x => x.SavedScripts)
                 .WithOne(x => x.Organization);
 
-            builder.Entity<RemotelyUser>()
+            builder.Entity<TessUser>()
                .HasOne(x => x.Organization)
-               .WithMany(x => x.RemotelyUsers);
+               .WithMany(x => x.TessUsers);
 
-            builder.Entity<RemotelyUser>()
+            builder.Entity<TessUser>()
                 .HasMany(x => x.DeviceGroups)
                 .WithMany(x => x.Users);
-            builder.Entity<RemotelyUser>()
+            builder.Entity<TessUser>()
                 .HasMany(x => x.Alerts)
                 .WithOne(x => x.User);
-            builder.Entity<RemotelyUser>()
+            builder.Entity<TessUser>()
                 .Property(x => x.UserOptions)
                 .HasConversion(
                     x => JsonSerializer.Serialize(x, null),
-                    x => JsonSerializer.Deserialize<RemotelyUserOptions>(x, null));
-            builder.Entity<RemotelyUser>()
+                    x => JsonSerializer.Deserialize<TessUserOptions>(x, null));
+            builder.Entity<TessUser>()
                 .HasMany(x => x.SavedScripts)
                 .WithOne(x => x.Creator);
-            builder.Entity<RemotelyUser>()
+            builder.Entity<TessUser>()
                 .HasMany(x => x.ScriptSchedules)
                 .WithOne(x => x.Creator);
 
-            builder.Entity<RemotelyUser>()
+            builder.Entity<TessUser>()
                 .HasIndex(x => x.UserName);
 
             builder.Entity<Device>()

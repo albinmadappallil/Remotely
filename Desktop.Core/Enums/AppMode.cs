@@ -1,4 +1,4 @@
-﻿namespace Remotely.Desktop.Core.Enums
+﻿namespace Tess.Desktop.Core.Enums
 {
     public enum AppMode
     {

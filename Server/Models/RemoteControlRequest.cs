@@ -1,4 +1,4 @@
-﻿namespace Remotely.Server.Models
+﻿namespace Tess.Server.Models
 {
     public class RemoteControlRequest
     {

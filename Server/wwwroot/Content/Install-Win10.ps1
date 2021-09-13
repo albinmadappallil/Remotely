@@ -1,6 +1,6 @@
 ﻿<#
 .SYNOPSIS
-   Installs the Remotely Client.
+   Installs the Tess Client.
 .DESCRIPTION
    Do not modify this script.  It was generated specifically for your account.
 .EXAMPLE
@@ -16,7 +16,7 @@ param (
 )
 
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
-$LogPath = "$env:TEMP\Remotely_Install.txt"
+$LogPath = "$env:TEMP\Tess_Install.txt"
 [string]$HostName = $null
 [string]$Organization = $null
 $ConnectionInfo = $null
@@ -28,7 +28,7 @@ else {
 	$Platform = "x86"
 }
 
-$InstallPath = "$env:ProgramFiles\Remotely"
+$InstallPath = "$env:ProgramFiles\Tess"
 
 function Write-Log($Message){
 	Write-Host $Message
@@ -62,19 +62,19 @@ function Run-StartupChecks {
 	}
 }
 
-function Stop-Remotely {
-	Start-Process -FilePath "cmd.exe" -ArgumentList "/c sc delete Remotely_Service" -Wait -WindowStyle Hidden
-	Stop-Process -Name Remotely_Agent -Force -ErrorAction SilentlyContinue
-	Stop-Process -Name Remotely_Desktop -Force -ErrorAction SilentlyContinue
+function Stop-Tess {
+	Start-Process -FilePath "cmd.exe" -ArgumentList "/c sc delete Tess_Service" -Wait -WindowStyle Hidden
+	Stop-Process -Name Tess_Agent -Force -ErrorAction SilentlyContinue
+	Stop-Process -Name Tess_Desktop -Force -ErrorAction SilentlyContinue
 }
 
-function Uninstall-Remotely {
-	Stop-Remotely
+function Uninstall-Tess {
+	Stop-Tess
 	Remove-Item -Path $InstallPath -Force -Recurse -ErrorAction SilentlyContinue
-	Remove-NetFirewallRule -Name "Remotely ScreenCast" -ErrorAction SilentlyContinue
+	Remove-NetFirewallRule -Name "Tess ScreenCast" -ErrorAction SilentlyContinue
 }
 
-function Install-Remotely {
+function Install-Tess {
 	if ((Test-Path -Path "$InstallPath") -and (Test-Path -Path "$InstallPath\ConnectionInfo.json")) {
 		$ConnectionInfo = Get-Content -Path "$InstallPath\ConnectionInfo.json" | ConvertFrom-Json
 		if ($ConnectionInfo -ne $null) {
@@ -102,25 +102,25 @@ function Install-Remotely {
 
 	if ($Path) {
 		Write-Log "Copying install files..."
-		Copy-Item -Path $Path -Destination "$env:TEMP\Remotely-Win10-$Platform.zip"
+		Copy-Item -Path $Path -Destination "$env:TEMP\Tess-Win10-$Platform.zip"
 
 	}
 	else {
 		$ProgressPreference = 'SilentlyContinue'
 		Write-Log "Downloading client..."
-		Invoke-WebRequest -Uri "$HostName/Content/Remotely-Win10-$Platform.zip" -OutFile "$env:TEMP\Remotely-Win10-$Platform.zip" 
+		Invoke-WebRequest -Uri "$HostName/Content/Tess-Win10-$Platform.zip" -OutFile "$env:TEMP\Tess-Win10-$Platform.zip" 
 		$ProgressPreference = 'Continue'
 	}
 
-	if (!(Test-Path -Path "$env:TEMP\Remotely-Win10-$Platform.zip")) {
+	if (!(Test-Path -Path "$env:TEMP\Tess-Win10-$Platform.zip")) {
 		Write-Log "Client files failed to download."
 		Do-Exit
 	}
 
-	Stop-Remotely
-	Get-ChildItem -Path "C:\Program Files\Remotely" | Where-Object {$_.Name -notlike "ConnectionInfo.json"} | Remove-Item -Recurse -Force
+	Stop-Tess
+	Get-ChildItem -Path "C:\Program Files\Tess" | Where-Object {$_.Name -notlike "ConnectionInfo.json"} | Remove-Item -Recurse -Force
 
-	Expand-Archive -Path "$env:TEMP\Remotely-Win10-$Platform.zip" -DestinationPath "$InstallPath"  -Force
+	Expand-Archive -Path "$env:TEMP\Tess-Win10-$Platform.zip" -DestinationPath "$InstallPath"  -Force
 
 	New-Item -ItemType File -Path "$InstallPath\ConnectionInfo.json" -Value (ConvertTo-Json -InputObject $ConnectionInfo) -Force
 
@@ -135,11 +135,11 @@ function Install-Remotely {
 		Invoke-RestMethod -Method Post -ContentType "application/json" -Uri "$HostName/api/devices" -Body $DeviceSetupOptions -UseBasicParsing
 	}
 
-	New-Service -Name "Remotely_Service" -BinaryPathName "$InstallPath\Remotely_Agent.exe" -DisplayName "Remotely Service" -StartupType Automatic -Description "Background service that maintains a connection to the Remotely server.  The service is used for remote support and maintenance by this computer's administrators."
-	Start-Process -FilePath "cmd.exe" -ArgumentList "/c sc.exe failure `"Remotely_Service`" reset=5 actions=restart/5000" -Wait -WindowStyle Hidden
-	Start-Service -Name Remotely_Service
+	New-Service -Name "Tess_Service" -BinaryPathName "$InstallPath\Tess_Agent.exe" -DisplayName "Tess Service" -StartupType Automatic -Description "Background service that maintains a connection to the Tess server.  The service is used for remote support and maintenance by this computer's administrators."
+	Start-Process -FilePath "cmd.exe" -ArgumentList "/c sc.exe failure `"Tess_Service`" reset=5 actions=restart/5000" -Wait -WindowStyle Hidden
+	Start-Service -Name Tess_Service
 
-	New-NetFirewallRule -Name "Remotely Desktop Unattended" -DisplayName "Remotely Desktop Unattended" -Description "The agent that allows screen sharing and remote control for Remotely." -Direction Inbound -Enabled True -Action Allow -Program "C:\Program Files\Remotely\Desktop\Remotely_Desktop.exe" -ErrorAction SilentlyContinue
+	New-NetFirewallRule -Name "Tess Desktop Unattended" -DisplayName "Tess Desktop Unattended" -Description "The agent that allows screen sharing and remote control for Tess." -Direction Inbound -Enabled True -Action Allow -Program "C:\Program Files\Tess\Desktop\Tess_Desktop.exe" -ErrorAction SilentlyContinue
 }
 
 try {
@@ -150,14 +150,14 @@ try {
 
 	if ($Uninstall) {
 		Write-Log "Uninstall started."
-		Uninstall-Remotely
+		Uninstall-Tess
 		Write-Log "Uninstall completed."
 		exit
 	}
 	else {
 		Write-Log "Install started."
         Write-Log
-		Install-Remotely
+		Install-Tess
 		Write-Log "Install completed."
 		exit
 	}

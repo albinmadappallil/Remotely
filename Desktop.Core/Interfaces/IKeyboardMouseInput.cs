@@ -1,7 +1,7 @@
-﻿using Remotely.Desktop.Core.Enums;
-using Remotely.Desktop.Core.Services;
+﻿using Tess.Desktop.Core.Enums;
+using Tess.Desktop.Core.Services;
 
-namespace Remotely.Desktop.Core.Interfaces
+namespace Tess.Desktop.Core.Interfaces
 {
     public interface IKeyboardMouseInput
     {

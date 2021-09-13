@@ -1,8 +1,8 @@
-﻿using Remotely.Desktop.Core.Interfaces;
-using Remotely.Desktop.Core.Services;
-using Remotely.Desktop.Core.ViewModels;
-using Remotely.Desktop.Win.Services;
-using Remotely.Shared.Win32;
+﻿using Tess.Desktop.Core.Interfaces;
+using Tess.Desktop.Core.Services;
+using Tess.Desktop.Core.ViewModels;
+using Tess.Desktop.Win.Services;
+using Tess.Shared.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace Remotely.Desktop.Win.ViewModels
+namespace Tess.Desktop.Win.ViewModels
 {
     public class FileTransferWindowViewModel : BrandedViewModelBase
     {
@@ -45,7 +45,7 @@ namespace Remotely.Desktop.Win.ViewModels
 
             var ofd = new OpenFileDialog()
             {
-                Title = "Upload File via Remotely",
+                Title = "Upload File via Tess",
                 Multiselect = true,
                 CheckFileExists = true,
                 InitialDirectory = Directory.Exists(userDir) ? userDir : rootDir

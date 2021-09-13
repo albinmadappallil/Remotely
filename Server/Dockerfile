@@ -22,19 +22,19 @@ RUN \
   apt-get -y install aspnetcore-runtime-5.0
 
 RUN \
-  mkdir -p /var/www/remotely && \
+  mkdir -p /var/www/Tess && \
   mkdir /config && \
-  wget -q https://github.com/lucent-sea/Remotely/releases/latest/download/Remotely_Server_Linux-x64.zip && \
-  unzip -o Remotely_Server_Linux-x64.zip -d /var/www/remotely && \
-  rm Remotely_Server_Linux-x64.zip
+  wget -q https://github.com/lucent-sea/Tess/releases/latest/download/Tess_Server_Linux-x64.zip && \
+  unzip -o Tess_Server_Linux-x64.zip -d /var/www/Tess && \
+  rm Tess_Server_Linux-x64.zip
 
 RUN \
-  mkdir -p /remotely-data && \
-  sed -i 's/DataSource=Remotely.db/DataSource=\/remotely-data\/Remotely.db/' /var/www/remotely/appsettings.json
+  mkdir -p /Tess-data && \
+  sed -i 's/DataSource=Tess.db/DataSource=\/Tess-data\/Tess.db/' /var/www/Tess/appsettings.json
 
-VOLUME "/remotely-data"
+VOLUME "/Tess-data"
 
-WORKDIR /var/www/remotely
+WORKDIR /var/www/Tess
 
 COPY DockerMain.sh /
 

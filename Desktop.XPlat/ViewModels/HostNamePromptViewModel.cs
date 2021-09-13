@@ -1,9 +1,9 @@
 ﻿using Avalonia.Controls;
 using ReactiveUI;
-using Remotely.Desktop.XPlat.Services;
+using Tess.Desktop.XPlat.Services;
 using System.Windows.Input;
 
-namespace Remotely.Desktop.XPlat.ViewModels
+namespace Tess.Desktop.XPlat.ViewModels
 {
     public class HostNamePromptViewModel : BrandedViewModelBase
     {

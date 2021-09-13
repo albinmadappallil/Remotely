@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Remotely.Agent.Interfaces;
-using Remotely.Agent.Services;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Utilities;
-using Remotely.Shared.Services;
+using Tess.Agent.Interfaces;
+using Tess.Agent.Services;
+using Tess.Shared.Enums;
+using Tess.Shared.Utilities;
+using Tess.Shared.Services;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -12,7 +12,7 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Remotely.Agent
+namespace Tess.Agent
 {
     public class Program
     {

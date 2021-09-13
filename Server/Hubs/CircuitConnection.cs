@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using Remotely.Server.Auth;
-using Remotely.Server.Models;
-using Remotely.Server.Services;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
+using Tess.Server.Auth;
+using Tess.Server.Models;
+using Tess.Server.Services;
+using Tess.Shared.Enums;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -18,12 +18,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Remotely.Server.Hubs
+namespace Tess.Server.Hubs
 {
     public interface ICircuitConnection
     {
         event EventHandler<CircuitEvent> MessageReceived;
-        RemotelyUser User { get; }
+        TessUser User { get; }
 
         Task DeleteRemoteLogs(string deviceId);
 
@@ -92,7 +92,7 @@ namespace Remotely.Server.Hubs
         public event EventHandler<CircuitEvent> MessageReceived;
 
         public string ConnectionId { get; set; }
-        public RemotelyUser User { get; set; }
+        public TessUser User { get; set; }
 
 
         public Task DeleteRemoteLogs(string deviceId)
@@ -254,7 +254,7 @@ namespace Remotely.Server.Hubs
             string username;
             if (runAsHostedService)
             {
-                username = "Remotely Server";
+                username = "Tess Server";
             }
             else
             {

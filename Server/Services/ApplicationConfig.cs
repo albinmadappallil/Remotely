@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Remotely.Shared.Enums;
-using Remotely.Shared.Models;
+using Tess.Shared.Enums;
+using Tess.Shared.Models;
 using System;
 
-namespace Remotely.Server.Services
+namespace Tess.Server.Services
 {
     public interface IApplicationConfig
     {

@@ -1,8 +1,8 @@
 ﻿using IWshRuntimeLibrary;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Win32;
-using Remotely.Agent.Installer.Win.Utilities;
-using Remotely.Shared.Models;
+using Tess.Agent.Installer.Win.Utilities;
+using Tess.Shared.Models;
 using System;
 using System.Configuration.Install;
 using System.Diagnostics;
@@ -18,14 +18,14 @@ using System.Web.Script.Serialization;
 using System.Windows;
 using FileIO = System.IO.File;
 
-namespace Remotely.Agent.Installer.Win.Services
+namespace Tess.Agent.Installer.Win.Services
 {
     public class InstallerService
     {
         public event EventHandler<string> ProgressMessageChanged;
         public event EventHandler<int> ProgressValueChanged;
 
-        private string InstallPath => Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "Program Files", "Remotely");
+        private string InstallPath => Path.Combine(Path.GetPathRoot(Environment.SystemDirectory), "Program Files", "Tess");
         private string Platform => Environment.Is64BitOperatingSystem ? "x64" : "x86";
         private JavaScriptSerializer Serializer { get; } = new JavaScriptSerializer();
         public async Task<bool> Install(string serverUrl,
@@ -53,11 +53,11 @@ namespace Remotely.Agent.Installer.Win.Services
 
                 ClearInstallDirectory();
 
-                await DownloadRemotelyAgent(serverUrl);
+                await DownloadTessAgent(serverUrl);
 
                 FileIO.WriteAllText(Path.Combine(InstallPath, "ConnectionInfo.json"), Serializer.Serialize(connectionInfo));
 
-                FileIO.Copy(Assembly.GetExecutingAssembly().Location, Path.Combine(InstallPath, "Remotely_Installer.exe"));
+                FileIO.Copy(Assembly.GetExecutingAssembly().Location, Path.Combine(InstallPath, "Tess_Installer.exe"));
 
                 await CreateDeviceOnServer(connectionInfo.DeviceID, serverUrl, deviceGroup, deviceAlias, organizationId);
 
@@ -91,7 +91,7 @@ namespace Remotely.Agent.Installer.Win.Services
 
                 StopService();
 
-                ProcessEx.StartHidden("cmd.exe", "/c sc delete Remotely_Service").WaitForExit();
+                ProcessEx.StartHidden("cmd.exe", "/c sc delete Tess_Service").WaitForExit();
 
                 await StopProcesses();
 
@@ -99,9 +99,9 @@ namespace Remotely.Agent.Installer.Win.Services
                 ClearInstallDirectory();
                 ProcessEx.StartHidden("cmd.exe", $"/c timeout 5 & rd /s /q \"{InstallPath}\"");
 
-                ProcessEx.StartHidden("netsh", "advfirewall firewall delete rule name=\"Remotely Desktop Unattended\"").WaitForExit();
+                ProcessEx.StartHidden("netsh", "advfirewall firewall delete rule name=\"Tess Desktop Unattended\"").WaitForExit();
 
-                GetRegistryBaseKey().DeleteSubKeyTree(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Remotely", false);
+                GetRegistryBaseKey().DeleteSubKeyTree(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Tess", false);
 
                 return true;
             }
@@ -114,9 +114,9 @@ namespace Remotely.Agent.Installer.Win.Services
 
         private void AddFirewallRule()
         {
-            var desktopExePath = Path.Combine(InstallPath, "Desktop", "Remotely_Desktop.exe");
-            ProcessEx.StartHidden("netsh", "advfirewall firewall delete rule name=\"Remotely Desktop Unattended\"").WaitForExit();
-            ProcessEx.StartHidden("netsh", $"advfirewall firewall add rule name=\"Remotely Desktop Unattended\" program=\"{desktopExePath}\" protocol=any dir=in enable=yes action=allow description=\"The agent that allows screen sharing and remote control for Remotely.\"").WaitForExit();
+            var desktopExePath = Path.Combine(InstallPath, "Desktop", "Tess_Desktop.exe");
+            ProcessEx.StartHidden("netsh", "advfirewall firewall delete rule name=\"Tess Desktop Unattended\"").WaitForExit();
+            ProcessEx.StartHidden("netsh", $"advfirewall firewall add rule name=\"Tess Desktop Unattended\" program=\"{desktopExePath}\" protocol=any dir=in enable=yes action=allow description=\"The agent that allows screen sharing and remote control for Tess.\"").WaitForExit();
         }
 
         private void BackupDirectory()
@@ -125,7 +125,7 @@ namespace Remotely.Agent.Installer.Win.Services
             {
                 Logger.Write("Backing up current installation.");
                 ProgressMessageChanged?.Invoke(this, "Backing up current installation.");
-                var backupPath = Path.Combine(Path.GetTempPath(), "Remotely_Backup.zip");
+                var backupPath = Path.Combine(Path.GetTempPath(), "Tess_Backup.zip");
                 if (FileIO.Exists(backupPath))
                 {
                     FileIO.Delete(backupPath);
@@ -221,7 +221,7 @@ namespace Remotely.Agent.Installer.Win.Services
             var shortcutLocation = Path.Combine(InstallPath, "Get Support.lnk");
             var shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
             shortcut.Description = "Get IT support";
-            shortcut.IconLocation = Path.Combine(InstallPath, "Remotely_Agent.exe");
+            shortcut.IconLocation = Path.Combine(InstallPath, "Tess_Agent.exe");
             shortcut.TargetPath = serverUrl.TrimEnd('/') + $"/GetSupport?deviceID={deviceUuid}";
             shortcut.Save();
 
@@ -234,24 +234,24 @@ namespace Remotely.Agent.Installer.Win.Services
         }
         private void CreateUninstallKey()
         {
-            var version = FileVersionInfo.GetVersionInfo(Path.Combine(InstallPath, "Remotely_Agent.exe"));
+            var version = FileVersionInfo.GetVersionInfo(Path.Combine(InstallPath, "Tess_Agent.exe"));
             var baseKey = GetRegistryBaseKey();
 
-            var remotelyKey = baseKey.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Remotely", true);
-            remotelyKey.SetValue("DisplayIcon", Path.Combine(InstallPath, "Remotely_Agent.exe"));
-            remotelyKey.SetValue("DisplayName", "Remotely");
-            remotelyKey.SetValue("DisplayVersion", version.FileVersion);
-            remotelyKey.SetValue("InstallDate", DateTime.Now.ToShortDateString());
-            remotelyKey.SetValue("Publisher", "Translucency Software");
-            remotelyKey.SetValue("VersionMajor", version.FileMajorPart.ToString(), RegistryValueKind.DWord);
-            remotelyKey.SetValue("VersionMinor", version.FileMinorPart.ToString(), RegistryValueKind.DWord);
-            remotelyKey.SetValue("UninstallString", Path.Combine(InstallPath, "Remotely_Installer.exe -uninstall -quiet"));
-            remotelyKey.SetValue("QuietUninstallString", Path.Combine(InstallPath, "Remotely_Installer.exe -uninstall -quiet"));
+            var TessKey = baseKey.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Tess", true);
+            TessKey.SetValue("DisplayIcon", Path.Combine(InstallPath, "Tess_Agent.exe"));
+            TessKey.SetValue("DisplayName", "Tess");
+            TessKey.SetValue("DisplayVersion", version.FileVersion);
+            TessKey.SetValue("InstallDate", DateTime.Now.ToShortDateString());
+            TessKey.SetValue("Publisher", "Genflip");
+            TessKey.SetValue("VersionMajor", version.FileMajorPart.ToString(), RegistryValueKind.DWord);
+            TessKey.SetValue("VersionMinor", version.FileMinorPart.ToString(), RegistryValueKind.DWord);
+            TessKey.SetValue("UninstallString", Path.Combine(InstallPath, "Tess_Installer.exe -uninstall -quiet"));
+            TessKey.SetValue("QuietUninstallString", Path.Combine(InstallPath, "Tess_Installer.exe -uninstall -quiet"));
         }
 
-        private async Task DownloadRemotelyAgent(string serverUrl)
+        private async Task DownloadTessAgent(string serverUrl)
         {
-            var targetFile = Path.Combine(Path.GetTempPath(), $"Remotely-Agent.zip");
+            var targetFile = Path.Combine(Path.GetTempPath(), $"Tess-Agent.zip");
 
             if (CommandLineParser.CommandLineArgs.TryGetValue("path", out var result) &&
                 FileIO.Exists(result))
@@ -260,7 +260,7 @@ namespace Remotely.Agent.Installer.Win.Services
             }
             else
             {
-                ProgressMessageChanged.Invoke(this, "Downloading Remotely agent.");
+                ProgressMessageChanged.Invoke(this, "Downloading Tess agent.");
                 using (var client = new WebClient())
                 {
                     client.DownloadProgressChanged += (sender, args) =>
@@ -268,14 +268,14 @@ namespace Remotely.Agent.Installer.Win.Services
                         ProgressValueChanged?.Invoke(this, args.ProgressPercentage);
                     };
 
-                    await client.DownloadFileTaskAsync($"{serverUrl}/Content/Remotely-Win10-{Platform}.zip", targetFile);
+                    await client.DownloadFileTaskAsync($"{serverUrl}/Content/Tess-Win10-{Platform}.zip", targetFile);
                 }
             }
 
-            ProgressMessageChanged.Invoke(this, "Extracting Remotely files.");
+            ProgressMessageChanged.Invoke(this, "Extracting Tess files.");
             ProgressValueChanged?.Invoke(this, 0);
 
-            var tempDir = Path.Combine(Path.GetTempPath(), "RemotelyUpdate");
+            var tempDir = Path.Combine(Path.GetTempPath(), "TessUpdate");
             if (Directory.Exists(tempDir))
             {
                 Directory.Delete(tempDir, true);
@@ -287,7 +287,7 @@ namespace Remotely.Agent.Installer.Win.Services
                 await Task.Delay(10);
             }
 
-            var wr = WebRequest.CreateHttp($"{serverUrl}/Content/Remotely-Win10-{Platform}.zip");
+            var wr = WebRequest.CreateHttp($"{serverUrl}/Content/Tess-Win10-{Platform}.zip");
             wr.Method = "Head";
             using (var response = (HttpWebResponse)await wr.GetResponseAsync())
             {
@@ -366,18 +366,18 @@ namespace Remotely.Agent.Installer.Win.Services
         private void InstallService()
         {
             Logger.Write("Installing service.");
-            ProgressMessageChanged?.Invoke(this, "Installing Remotely service.");
-            var serv = ServiceController.GetServices().FirstOrDefault(ser => ser.ServiceName == "Remotely_Service");
+            ProgressMessageChanged?.Invoke(this, "Installing Tess service.");
+            var serv = ServiceController.GetServices().FirstOrDefault(ser => ser.ServiceName == "Tess_Service");
             if (serv == null)
             {
-                var command = new string[] { "/assemblypath=" + Path.Combine(InstallPath, "Remotely_Agent.exe") };
+                var command = new string[] { "/assemblypath=" + Path.Combine(InstallPath, "Tess_Agent.exe") };
                 var context = new InstallContext("", command);
                 var serviceInstaller = new ServiceInstaller()
                 {
                     Context = context,
-                    DisplayName = "Remotely Service",
-                    Description = "Background service that maintains a connection to the Remotely server.  The service is used for remote support and maintenance by this computer's administrators.",
-                    ServiceName = "Remotely_Service",
+                    DisplayName = "Tess Service",
+                    Description = "Background service that maintains a connection to the Tess server.  The service is used for remote support and maintenance by this computer's administrators.",
+                    ServiceName = "Tess_Service",
                     StartType = ServiceStartMode.Automatic,
                     DelayedAutoStart = true,
                     Parent = new ServiceProcessInstaller()
@@ -386,9 +386,9 @@ namespace Remotely.Agent.Installer.Win.Services
                 var state = new System.Collections.Specialized.ListDictionary();
                 serviceInstaller.Install(state);
                 Logger.Write("Service installed.");
-                serv = ServiceController.GetServices().FirstOrDefault(ser => ser.ServiceName == "Remotely_Service");
+                serv = ServiceController.GetServices().FirstOrDefault(ser => ser.ServiceName == "Tess_Service");
 
-                ProcessEx.StartHidden("cmd.exe", "/c sc.exe failure \"Remotely_Service\" reset= 5 actions= restart/5000");
+                ProcessEx.StartHidden("cmd.exe", "/c sc.exe failure \"Tess_Service\" reset= 5 actions= restart/5000");
             }
             if (serv.Status != ServiceControllerStatus.Running)
             {
@@ -401,13 +401,13 @@ namespace Remotely.Agent.Installer.Win.Services
         {
             try
             {
-                var backupPath = Path.Combine(Path.GetTempPath(), "Remotely_Backup.zip");
+                var backupPath = Path.Combine(Path.GetTempPath(), "Tess_Backup.zip");
                 if (FileIO.Exists(backupPath))
                 {
                     Logger.Write("Restoring backup.");
                     ClearInstallDirectory();
                     ZipFile.ExtractToDirectory(backupPath, InstallPath);
-                    var serv = ServiceController.GetServices().FirstOrDefault(ser => ser.ServiceName == "Remotely_Service");
+                    var serv = ServiceController.GetServices().FirstOrDefault(ser => ser.ServiceName == "Tess_Service");
                     if (serv?.Status != ServiceControllerStatus.Running)
                     {
                         serv?.Start();
@@ -422,8 +422,8 @@ namespace Remotely.Agent.Installer.Win.Services
 
         private async Task StopProcesses()
         {
-            ProgressMessageChanged?.Invoke(this, "Stopping Remotely processes.");
-            var procs = Process.GetProcessesByName("Remotely_Agent").Concat(Process.GetProcessesByName("Remotely_Desktop"));
+            ProgressMessageChanged?.Invoke(this, "Stopping Tess processes.");
+            var procs = Process.GetProcessesByName("Tess_Agent").Concat(Process.GetProcessesByName("Tess_Desktop"));
 
             foreach (var proc in procs)
             {
@@ -436,13 +436,13 @@ namespace Remotely.Agent.Installer.Win.Services
         {
             try
             {
-                var remotelyService = ServiceController.GetServices().FirstOrDefault(x => x.ServiceName == "Remotely_Service");
-                if (remotelyService != null)
+                var TessService = ServiceController.GetServices().FirstOrDefault(x => x.ServiceName == "Tess_Service");
+                if (TessService != null)
                 {
-                    Logger.Write("Stopping existing Remotely service.");
-                    ProgressMessageChanged?.Invoke(this, "Stopping existing Remotely service.");
-                    remotelyService.Stop();
-                    remotelyService.WaitForStatus(ServiceControllerStatus.Stopped);
+                    Logger.Write("Stopping existing Tess service.");
+                    ProgressMessageChanged?.Invoke(this, "Stopping existing Tess service.");
+                    TessService.Stop();
+                    TessService.WaitForStatus(ServiceControllerStatus.Stopped);
                 }
             }
             catch (Exception ex)

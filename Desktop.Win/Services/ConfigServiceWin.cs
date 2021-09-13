@@ -1,16 +1,16 @@
-﻿using Remotely.Desktop.Core.Interfaces;
-using Remotely.Shared.Models;
-using Remotely.Shared.Utilities;
+﻿using Tess.Desktop.Core.Interfaces;
+using Tess.Shared.Models;
+using Tess.Shared.Utilities;
 using System;
 using System.IO;
 using System.Text.Json;
 
-namespace Remotely.Desktop.Win.Services
+namespace Tess.Desktop.Win.Services
 {
 
     public class ConfigServiceWin : IConfigService
     {
-        private static readonly string _configFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Remotely");
+        private static readonly string _configFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Tess");
         private static readonly string _configFile = Path.Combine(_configFolder, "Config.json");
 
         public DesktopAppConfig GetConfig()
