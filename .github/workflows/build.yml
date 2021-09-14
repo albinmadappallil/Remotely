@@ -28,7 +28,7 @@ on:
         required: true
       rid:
         description: 'Server Runtime Identifier'     
-        required: false
+        required: true
         default: "linux-x64"
 
 jobs:
