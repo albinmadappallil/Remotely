@@ -24,7 +24,7 @@ on:
   workflow_dispatch:
     inputs:
       serverUrl:
-        description: 'Server URL'     
+        description: 'http://tessdemo.giize.com/'     
         required: true
       rid:
         description: 'Server Runtime Identifier'     
