@@ -24,11 +24,11 @@ on:
   workflow_dispatch:
     inputs:
       serverUrl:
-        description: 'http://tessdemo.giize.com/'     
+        description: 'http://192.168.43.70/'     
         required: true
       rid:
         description: 'Server Runtime Identifier'     
-        required: true
+        required: false
         default: "linux-x64"
 
 jobs:
