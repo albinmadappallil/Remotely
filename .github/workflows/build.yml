@@ -88,7 +88,7 @@ jobs:
     needs: build-mac
 
     env:
-      Solution_Name: Tess_Remote.sln     
+      Solution_Name: C:\Users\inajose\source\repos\Tess\Tess_Remote.sln     
       Configuration: Release
       PfxBase64: ${{ secrets.BASE64_ENCODED_PFX }}
       PfxKey: ${{ secrets.PFX_KEY }}
